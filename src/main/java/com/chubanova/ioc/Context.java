@@ -4,13 +4,14 @@ import com.chubanova.command.*;
 import com.chubanova.state.MoveTo;
 import com.chubanova.state.Normal;
 import com.chubanova.state.State;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class Context {
@@ -110,6 +111,19 @@ public class Context {
                 (Function<Object[], Object>) (
                         args -> stashedCommands
                 )).execute();
+
+
+//        IoC.<Command>resolve(
+//                "IoC.Register",
+//                "InterpreterCommand",
+//                (Function<Object[], Object>) (
+//                        args -> new InterpretCommand(
+//                                1,1,
+//                                (Queue<Command>) args[0],
+//                                (AtomicBoolean) args[1])
+//                )).execute();
     }
+
+
 
 }
